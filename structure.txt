@@ -1,0 +1,107 @@
+backend/
+│
+├── app/
+│   ├── __init__.py
+│   ├── main.py                  # FastAPI app entry point
+│   │
+│   ├── api/                     # API routes (controllers)
+│   │   ├── __init__.py
+│   │   ├── auth.py              # Login, JWT token
+│   │   ├── books.py             # View/search books (user)
+│   │   ├── borrow.py            # Borrow & return (user)
+│   │   └── admin.py             # Admin-only routes
+|   |   |── wishlist.py          # User wishlist routes
+│   │
+│   ├── core/                    # Core application logic
+│   │   ├── __init__.py
+│   │   ├── config.py            # Environment settings
+│   │   ├── database.py          # Database connection
+│   │   └── security.py          # Password hashing & JWT
+│   │
+│   ├── models/                  # SQLAlchemy models (tables)
+│   │   ├── __init__.py
+│   │   ├── user.py              # users table (admin + user)
+│   │   ├── book.py              # books table
+│   │   └── borrow.py            # borrow_records table
+│   │
+│   ├── schemas/                 # Pydantic schemas
+│   │   ├── __init__.py
+│   │   ├── user_schema.py
+│   │   ├── book_schema.py
+│   │   └── borrow_schema.py
+│   │
+│   ├── services/                # Business logic
+│   │   ├── __init__.py
+│   │   ├── user_service.py
+│   │   ├── book_service.py
+│   │   └── borrow_service.py
+│   │
+│   └── utils/
+│       ├── __init__.py
+│       └── common.py            # Helper utilities
+│
+├── alembic/                     # Database migrations
+│   ├── versions/
+│   └── env.py
+│
+├── .env                         # Backend environment variables
+├── requirements.txt
+└── README.md    (optional backend-only readme)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+backend/
+│
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   │
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── auth.py              # Login / JWT
+│   │   ├── books.py             # View/search books
+│   │   ├── borrow.py            # Borrow/Return requests (status pending)
+│   │   ├── admin.py             # Admin approval + manage books
+│   │   └── wishlist.py          # User wishlist routes
+│   │
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── config.py            # .env settings
+│   │   ├── database.py          # DB connection
+│   │   └── security.py          # Password hashing + JWT
+│   │
+│   ├── models.py
+│   │
+│   ├── schemas.py
+│   │
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── user_service.py
+│   │   ├── book_service.py
+│   │   ├── borrow_service.py
+│   │   └── wishlist_service.py
+│   │
+│   └── utils/
+│       ├── __init__.py
+│       └── common.py
+│
+├── alembic/
+│   ├── versions/
+│   └── env.py
+│
+├── .env
+├── requirements.txt
+└── README.md
