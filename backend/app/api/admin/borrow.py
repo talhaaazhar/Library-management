@@ -11,9 +11,17 @@ router = APIRouter(
 )
 
 
-
-@router.get('/', response_model=BorrowRead)
+# List all borrow records
+@router.get('/')
 async def admin_list_borrows(db: Session = Depends(get_db)):
     return list_all_borrows(db)
 
 
+# Force too return a book
+@router.put("/return/{borrow_id}")
+def admin_return_borrow(borrow_id: int, db: Session = Depends(get_db)):
+    try:
+        borrow = admin_return_book(db, borrow_id)
+        return borrow
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))

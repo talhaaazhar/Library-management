@@ -26,23 +26,41 @@ def borrow_book(db: Session, user_id: int, book_id: int) -> BorrowRecord:
 
 
 # ------------------- RETURN A BOOK -------------------
-def return_book(db: Session, borrow_id: int) -> BorrowRecord:
-    borrow = db.query(BorrowRecord).filter(BorrowRecord.id == borrow_id).first()
+def return_book(db: Session, borrow_id: int, user_id: int) -> BorrowRecord:
+    # borrow = db.query(BorrowRecord).filter(BorrowRecord.id == borrow_id).first()
+    borrow = db.query(BorrowRecord).filter(
+        BorrowRecord.id == borrow_id,
+        BorrowRecord.user_id == user_id
+    ).first()
+
     if not borrow:
-        raise ValueError("Borrow record not found")
+        raise ValueError("Borrow record not found or does not belong to user")
     if borrow.status != "borrowed":
         raise ValueError("Book already returned")
 
     borrow.return_date = datetime.utcnow()
     borrow.status = "returned"
-
-    # Update book available copies
-    book = borrow.book
-    book.available_copies += 1
+    borrow.book.available_copies += 1
 
     db.commit()
     db.refresh(borrow)
     return borrow
+
+    # if not borrow:
+    #     raise ValueError("Borrow record not found or does not belongs to you")
+    # if borrow.status != "borrowed":
+    #     raise ValueError("Book already returned")
+
+    # borrow.return_date = datetime.utcnow()
+    # borrow.status = "returned"
+
+    # # Update book available copies
+    # book = borrow.book
+    # book.available_copies += 1
+
+    # db.commit()
+    # db.refresh(borrow)
+    # return borrow
 
 
 # ------------------- LIST BORROW RECORDS FOR USER -------------------
