@@ -18,7 +18,7 @@ app = FastAPI()
 app.add_middleware(LoggingMiddleware)
 
 
-@app.get('/helath')
+@app.get('/health')
 def check_health():
     return {"status": "ok, its healthy !"}
 app.include_router(auth.auth_router)
