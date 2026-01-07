@@ -12,9 +12,15 @@ from app.api.user import books , user, wishlist, borrow
 
 app = FastAPI()
 
+
+
 # --------------------- MIDDLEWARE ---------------------
 app.add_middleware(LoggingMiddleware)
 
+
+@app.get('/helath')
+def check_health():
+    return {"status": "ok, its healthy !"}
 app.include_router(auth.auth_router)
 app.include_router(admin_books.Admin_books_router)
 app.include_router(books.user_books_router)
