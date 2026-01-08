@@ -20,7 +20,7 @@ app.add_middleware(LoggingMiddleware)
 
 @app.get('/health')
 def check_health():
-    return {"status": "ok, its healthy !"}
+    return {"status": "ok, it's healthy !"}
 app.include_router(auth.auth_router)
 app.include_router(admin_books.Admin_books_router)
 app.include_router(books.user_books_router)
