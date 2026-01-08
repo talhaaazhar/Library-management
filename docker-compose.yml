@@ -7,9 +7,9 @@ services:
     container_name: library_db
     restart: always
     environment:
-      POSTGRES_USER: dev_user
-      POSTGRES_PASSWORD: 12345678
-      POSTGRES_DB: library_db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5433:5432"
     volumes:
@@ -27,7 +27,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://dev_user:12345678@db:5432/library_db
+      DATABASE_URL: ${DATABASE_URL}
 
 volumes:
   db_data:
